@@ -5,14 +5,13 @@
 Wir werden nun anfangen und alle nötigen Programme installieren, um in der Lage zu sein, die gewünschte Software zu schreiben und sie auszuprobieren.  
 Um Anwendungen auch auf anderen Platformen installieren zu können, werden wir zusätzliche Software im Kapitel über die Installation, später in diesem Buch, installieren.  
 
-Ich gehe davon aus, das du bereits Python3 und Pip auf deinem Rechner installiert hast. Wenn nicht, findest du alle notwendigen Informationen auf der [Python](https://python.org) Webseite. Wir benötigen Python in der Version 3.7.   
+Ich gehe davon aus, das du bereits Python3 und Pip auf deinem Rechner installiert hast. Wenn nicht, findest du alle notwendigen Informationen auf der [Python](https://python.org) Webseite. Wir benötigen Python in der Version 3.8.10.   
 Ich gehe ausserdem davon aus, dass du in der Lage bist Pakete mittels Pip zu installieren.  
 
-Zuerst werden wir [PyQt5](https://www.riverbankcomputing.com/software/pyqt/intro) welches zusammen mit Qt5 kommt installieren, damit wir Desktop-GUI-Applikationen entwickeln können. 
+Zuerst werden wir [PySide6] installieren, damit wir Desktop-GUI-Applikationen entwickeln können. 
 
 ```console
-user@machine:/path$ pip3 install PyQt5
-user@machine:/path$ pip3 install PyQtWebEngine
+user@machine:/path$ pip install PySide6
 ```
 Dann werden wir [Visual Studio Code](https://code.visualstudio.com/) installieren. VS-Code ist kostenlos und Open Source und hat viele nützliche Erweiterungen um Python Code schreiben zu können.  
 Du kannst VS-Code [hier](https://code.visualstudio.com/Download) runterladen. Ich gehe davon aus, dass du in der Lage bist VS-Code selbständig zu installieren, ansonsten findest auf deren Webseite wunderbare Anleitungen.  
@@ -77,16 +76,31 @@ Ich gehe hier nicht weiter ins Detail, versuche aber später im Buch auf die Ein
 *basic.py*
 ```python
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtQml import QQmlApplicationEngine
 
-
-app = QApplication(sys.argv)
-w = QWidget()
-w.resize(250, 150)
-w.setWindowTitle('Simple')
-w.show()
-app.exec()
+if __name__ == "__main__":
+    app = QGuiApplication(sys.argv)
+    engine = QQmlApplicationEngine("view.qml")
+    if not engine.rootObjects():
+        sys.exit(-1)
+    sys.exit(app.exec())
 ```
+
+*view.qml*
+```qml
+import QtQuick 2.0
+import QtQuick.Controls 2.5
+
+ApplicationWindow 
+{
+    width: 640
+    height: 480
+    visible: true
+    title: "Simple"
+}
+```
+
 In diesem Fall, da wir die Python Datei nicht *main.py* genannt haben, führen wir Python in einem Terminal innerhalb von VS-Code aus..  
 
 ```console
@@ -95,9 +109,8 @@ user@machine:/path$ python3 basic.py
 
 ![AltText](../images/simple.png "Title")  
   
-In diesem Beispiel instanziieren wir eine Application, zusätzlich noch ein Widget, welches hier als Fenster dient,setzen die Grösse des Fensters, setzen den Titel des Fensters, machen das Fenster sichtbar und starten den MainLoop.  
-Im MainLoop wird in einer Schleife auf Ereignisse wie Mausklicks, Tastatureingabe abgefragt und sie dann dem Fenster zur Auswertung übergeben.  In diesem Fall wird das Fenster lediglich auf Veränderung der Fenstergrösse, auf das Verschieben des Fensters und das Schliessen des Fensters reagieren, sollten wir auf den grünen Schliessen-Knopf, recht oben in der Ecke, klicken. Hierbei wird dann die MainLoop verlassen und die Anwendung beendet.   
+In diesem Beispiel instanziieren wir eine Application, und laden das Userinterface aus der Datei *view.qml*.     
 
 ##Zusammenfassung
 
-Nachdem wir die Entwicklungsumgebung aufgebaut haben, konnten wir die erste PyQt Anwendung erstellen und ausführen. 
+Nachdem wir die Entwicklungsumgebung aufgebaut haben, konnten wir die erste PySide6 Anwendung erstellen und ausführen. 

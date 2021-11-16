@@ -3,6 +3,7 @@ import EbookCreator 1.0
 Ebook {
     name: "Erstelle Android Applikationen mit Python, Qt und PyQt5"
     language: "de"
+    size: ""
     theme: "Epub3DE"
     creator: "Olaf Art Ananda"
     Part {

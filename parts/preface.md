@@ -3,6 +3,7 @@
 **Erstelle native WebApplikationen mit QML und Python**  
 von Adam Art Ananda  
 (C) Copyright 2021 Adam Art Ananda. All rights reserved.
+
 ##Motivation
 
 Nach dem ich bereits seit über 30 Jahren Software entwickle, kam ich von C, Assembler, Clipper, Powerbuilder, Java, C#, Objetive-C, C++ zu Python. Und rate mal...   
@@ -18,11 +19,19 @@ Bevor ich mein erstes Buch über Python GUI geschrieben habe, habe ich ein Video
 Er sagte auch, das die erfahrenen Entwickler dafür verantwortlich sind, wenn z.B. ein selbst fahrendes Auto einen Menschen umfährt und tötet, nur weil ein Softwarefehler vorlag. Als ich das Heute gehörte habe, habe ich mich entschlossen andere Entwickler auszubilden und habe mit diesem Buch begonnen. 
 
 ##Warum RemoteQML
-Du bist sicherlich auch schon öfters auf Webseiten gestoßen, die versuchen eine App darzustellen oder du hast dir eine App für dein Smartphone runtergeladen und mußtest feststellen, das dies gar keine native App ist, sondern einfach nur eine Webseite rendert.  
-Die Art von WebApps sind zwar immer auf dem neusten Stand und alle Nutzer arbeiten mit der selben Version, aber zum einen sind diese Apps einfach langsam, da bei jedem Klick auf einen Button ein RoundTrip zum Server gemacht wird um den aktuellen Status der App runterzuladen und zum anderen sind diese Apps einfach nicht wirklich benutzerfreundlich.  
+Du bist sicherlich auch schon öfters auf Webseiten gestoßen, die versuchen eine App darzustellen oder du hast dir eine App für dein Smartphone runtergeladen und mußtest feststellen, das dies gar keine native App ist, sondern einfach nur eine Webseite anzeigt.  
+Die Art von WebApps sind zwar immer auf dem neusten Stand und alle Nutzer arbeiten mit der selben Version, aber zum einen sind diese Apps einfach langsam, da z.B. bei jedem Klick auf einen Button ein RoundTrip zum Server gemacht wird um den aktuellen Status der App runterzuladen und zum anderen sind diese Apps einfach nicht wirklich benutzerfreundlich.  
+
+Mit dem GUI-Framework Qt können wir native Apps herstellen und mit Hilfe der Markup-Language QML können wir die Deklaration für das Userinterface dynamisch von einem Webserver laden. Das Laden dieses QML geschieht lediglich ein einziges Mal, nachdem auf dem Server eine Änderung stattgefunden hat, danach wird die UI dann wieder aus dem lokalen Cash geladen und man spricht hier auch von nativen Apps. 
+
+Wir haben hier nun die Vorteile einer nativen App, was z.B. Performance und Benutzerfreundlichkeit angeht und zusätzlich genießen wir den Vorteil einer dynamischen Webseite, denn Änderungen am Client müssen nun nicht mehr mit sogenannten Updates ausgeliefert werden, sondern werden diese automatisch bei Bedarf vom Webserver geladen.  
+
+Ändern wir zum Beispiel einfach nur eine einzige Zeile Code in der Applikation, um einen Fehler zu beheben, so müssten wir das Programm kompilieren, ein Setup-Programm erstellen und dieses als Update an alle Benutzer ausliefern. Hierbei kommt es dann mitunter dazu, das die Benutzer mit unterschiedlichen Versionen arbeiten, da nicht alle gleichzeitig das Update durchführen. Mit anderen Worten, haben ein paar der Benutzer noch den Fehler im Programm.  
+Mit RemoteQML müssen wir lediglich diese eine Codezeile in einer QML-Datei auf dem Webserver anpassen und der Client lädt diese Änderung beim nächsten Mal, wenn das Programm gestartet wird.
+
 
 ##Für Wen Ist Dieses Buch
-Wenn du in der Lage bist, einfache Programme in Python zu schreiben und interessiert bist Anwendungen mit einem grafischem Benutzer-Interface für Android zu schreiben, dann ist dieses Buch genau das richtige für dich.  
+Wenn du in der Lage bist, einfache Programme in Python zu schreiben und interessiert bist Anwendungen mit einem grafischem Benutzer-Interface zu schreiben, dann ist dieses Buch genau das richtige für dich.  
 Du musst dich nicht unbedingt mit Qt auskennen.  
 Wenn du willst, probiere alle Beispiele aus diesem Buch selber aus. Von Vorteil wäre es, wenn du auch, wie ich, auf Linux arbeitest. Die Beispiele sollten aber auch mühelos auf MacOS und Windows laufen. Lediglich für die Installation der benötigten Software solltest du dich selber im Internet einlesen, da ich nur die nötigen Schritte für Linux erkläre.  
 
@@ -34,10 +43,11 @@ In diesem Buch gehe ich nicht in Python spezifische Details ein.
 ##Wie Dieses Buch Organisiert Ist
 
 Hier findest du die Übersicht über die Teile dieses Buches.  
-Zuerst werden wir in ***Teil I*** alle nötigen Werkzeuge zum Erstellen der Software mit PyQt5 und Python installieren.  
-In ***Teil II*** lernst du etwas über die verschiedenen Ansätze um Anwendungen zu bauen.  
-In ***Teil III*** lernst du Anwendungen mit Python und QML zu schreiben.  
-TODO  
+Zuerst werden wir in ***Teil I*** alle nötigen Werkzeuge zum Erstellen der Software mit PySide6 und Python installieren.  
+In ***Teil II*** lernst du einfache Anwendungen mit Python und QML zu schreiben.  
+In ***Teil III*** zeige ich dir den universell einsetzbaren Client, mit dem wir dann das Userinterface dynamisch von einem Webserver laden können.  
+
+In ***Teil IV*** zeige ich dir eine simple Applikation, die wir über einen Webserver ausliefern werden.
 
 
 ##Konventionen In Diesem Buch
@@ -59,11 +69,11 @@ Feste Schriftbreite
 
 ##Beipiel Source Code Benutzen
 
-Die gesamten [Beispiele](https://github.com/Artanidos/RemoteQMLBook/) sind auf github.com verfügbar.
+Die gesamten [Beispiele](https://github.com/Artanidos/RemoteQML/) sind auf github.com verfügbar.
 
 ##Wie Du Mich Kontaktieren Kannst
 
-Solltest du eine Frage oder ein Kommentar zu diesem Buch haben, scheue dich nicht, mir eine Email zu schreiben. Sende deine Fragen und Kommentare einfach an: japp.olaf@gmail.com
+Solltest du eine Frage oder ein Kommentar zu diesem Buch haben, scheue dich nicht, mir eine Email zu schreiben. Sende deine Fragen und Kommentare einfach an: [japp.olaf@gmail.com](japp.olaf@gmail.com)
 
 ##Danksagungen
 Zu allererst bin ich meinem Körper dankbar, weil er mich zur richtigen Zeit auf die richtigen Wege geführt hat. Ich weiß, das klingt bestimmt ein bisschen verrückt, aber da ich Maschinenschlosser gelernt habe und bereits nach wenigen Jahren, Rückenschwerzen bekam und über ein halbes Jahr krank war, habe ich angefangen Maschinenbau zu studieren und während des Studiums habe ich dann mit dem Programmieren angefangen. Zu der Zeit habe ich mich entschieden, mein Studium abzubrechen und als Softwareentwickler zu arbeiten.  
