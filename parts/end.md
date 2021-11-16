@@ -16,5 +16,3 @@ Art hat für mehrere Top 500 Unternehmen wie Dupont, Dresdner Bank, Commerzbank 
 #Impressum
 Olaf Japp  
 japp.olaf@gmail.com
-
-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

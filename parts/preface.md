@@ -1,6 +1,6 @@
 #Einleitung
 ##Copyright
-**Erstelle ...**  
+**Erstelle native WebApplikationen mit QML und Python**  
 von Adam Art Ananda  
 (C) Copyright 2021 Adam Art Ananda. All rights reserved.
 ##Motivation
