@@ -1,2 +1,3 @@
-# Erstelle Android Applikationen mit Python, Qt und PyQt5
+# Remote QML
+## Erstelle native WebApplikationen mit QML und Python
 Hier kannst du den Sourcecode für das Buch finden.
